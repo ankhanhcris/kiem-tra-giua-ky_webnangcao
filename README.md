@@ -25,6 +25,6 @@ npm run dev              # http://localhost:5173
 
 ## Tự đánh giá (điền khi nộp)
 
-- Câu đã làm xong: 
-- Câu làm dở / chưa làm: 
-- Có dùng công cụ AI không? Nếu có, ghi rõ phần nào: 
+- Câu đã làm xong: Câu 1, 2, 3, 4 (đã chạy đủ kịch bản tự kiểm tra ở Phụ lục A); Câu 5: làm trên nhánh `giuaky/2401ITA2401`, commit theo từng câu.
+- Câu làm dở / chưa làm: C5.3 — chưa push nhánh và mở Pull Request.
+- Có dùng công cụ AI không? Nếu có, ghi rõ phần nào: Có. Toàn bộ mã Câu 1–4 và các bước Git được làm cùng trợ lý AI, thực hiện sau giờ thi.
