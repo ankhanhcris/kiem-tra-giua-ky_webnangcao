@@ -8,8 +8,7 @@ export default function Header({ tongPhan }) {
       <h1>{tenQuan}</h1>
       <span>
         Giỏ:
-        {/* TODO C2.3: hiển thị tongPhan bên trong thẻ <span> dưới đây */}
-        <span className="huy-hieu" data-testid="tong-phan"></span>
+        <span className="huy-hieu" data-testid="tong-phan">{tongPhan}</span>
         phần
       </span>
     </header>
