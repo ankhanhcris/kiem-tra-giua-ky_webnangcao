@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header.jsx';
 import DanhSachMon from './components/DanhSachMon.jsx';
 import GioHang from './components/GioHang.jsx';
 import FormDatMon from './components/FormDatMon.jsx';
 import Khung from './components/Khung.jsx';
 import { DS_MON_AN } from './data/monAn.js';
+import useLocalStorage from './hooks/useLocalStorage.js';
+
+const TEN_QUAN = import.meta.env.VITE_TEN_QUAN;
 
 export default function App() {
-  // C2.2: state "gio" — mảng { id, soLuong }
-  // TODO C3.3: sau khi viết xong hook, đổi state giỏ sang useLocalStorage('gio-hang', [])
-  const [gio, setGio] = useState([]);
+  // C2.2 + C3.3: state "gio" — mảng { id, soLuong }, lưu vào localStorage với khóa "gio-hang"
+  const [gio, setGio] = useLocalStorage('gio-hang', []);
 
   // C2.4: id món đang được chọn, ban đầu null
   const [idDangChon, setIdDangChon] = useState(null);
@@ -18,7 +20,10 @@ export default function App() {
   // C2.3: tính trực tiếp từ gio, không tạo state riêng
   const tongPhan = gio.reduce((tong, dong) => tong + dong.soLuong, 0);
 
-  // TODO C3.2: useEffect cập nhật document.title: không có món → "<tên quán>"; có món → "(n) <tên quán>"
+  // C3.2: không có món → "<tên quán>"; có món → "(n) <tên quán>"
+  useEffect(() => {
+    document.title = tongPhan > 0 ? `(${tongPhan}) ${TEN_QUAN}` : TEN_QUAN;
+  }, [tongPhan]);
 
   function datMon(id) {
     // C2.2: món chưa có trong giỏ → thêm { id, soLuong: 1 }; đã có → tăng soLuong thêm 1.

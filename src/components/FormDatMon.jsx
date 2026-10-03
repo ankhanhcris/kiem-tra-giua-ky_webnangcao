@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 // Biểu mẫu thông tin nhận món. Props: onGui(thongTin), choPhepGui (boolean)
 
 const GIA_TRI_DAU = { hoTen: '', soDienThoai: '', ghiChu: '' };
@@ -19,12 +21,16 @@ export default function FormDatMon({ onGui, choPhepGui }) {
   //     hợp lệ thì gọi onGui({ hoTen, soDienThoai, ghiChu }) với giá trị đã cắt khoảng trắng (trim)
   //   - Lỗi hiện dưới từng ô trong <p className="loi" role="alert">
 
-  // TODO C3.4: useRef + useEffect để ô "Họ tên" tự có con trỏ mỗi khi form vừa hiện
+  // C3.4: ô "Họ tên" tự có con trỏ mỗi khi form vừa hiện (kể cả khi được dựng lại do đổi key)
+  const refHoTen = useRef(null);
+  useEffect(() => {
+    refHoTen.current.focus();
+  }, []);
 
   return (
     <form className="form-dat-mon" noValidate>
       <label htmlFor="ho-ten">Họ tên</label>
-      <input id="ho-ten" name="hoTen" />
+      <input id="ho-ten" name="hoTen" ref={refHoTen} />
 
       <label htmlFor="so-dien-thoai">Số điện thoại</label>
       <input id="so-dien-thoai" name="soDienThoai" />
