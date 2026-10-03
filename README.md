@@ -2,9 +2,9 @@
 
 | Thông tin | Điền vào |
 |---|---|
-| Họ và tên | |
-| Mã số sinh viên | |
-| Số máy | |
+| Họ và tên | Trần An Khánh |
+| Mã số sinh viên | 2401ITA2401 |
+| Số máy | Không có |
 
 ## Chạy dự án
 
