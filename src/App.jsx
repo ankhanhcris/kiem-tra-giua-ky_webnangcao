@@ -15,7 +15,9 @@ export default function App() {
 
   // C2.4: id món đang được chọn, ban đầu null
   const [idDangChon, setIdDangChon] = useState(null);
-  // TODO C4.3: state cho thông báo "đã nhận đơn" và bộ đếm dùng làm key đặt lại form
+  // C4.3: thông báo "đã nhận đơn" và bộ đếm dùng làm key đặt lại form
+  const [thongBao, setThongBao] = useState('');
+  const [khoaForm, setKhoaForm] = useState(0);
 
   // C2.3: tính trực tiếp từ gio, không tạo state riêng
   const tongPhan = gio.reduce((tong, dong) => tong + dong.soLuong, 0);
@@ -36,8 +38,10 @@ export default function App() {
   }
 
   function guiDon(thongTin) {
-    // TODO C4.3: hiện thông báo "Đã nhận đơn của <hoTen>" (thẻ <p role="status">), làm rỗng giỏ,
-    //            và đặt lại form (gợi ý: đổi key của FormDatMon)
+    // C4.3: hiện thông báo, làm rỗng giỏ, đổi key để React dựng lại FormDatMon (form về trống)
+    setThongBao(`Đã nhận đơn của ${thongTin.hoTen}`);
+    setGio([]);
+    setKhoaForm((k) => k + 1);
   }
 
   return (
@@ -48,14 +52,26 @@ export default function App() {
           <DanhSachMon dsMon={DS_MON_AN} idDangChon={idDangChon} onChon={setIdDangChon} onDat={datMon} />
         </Khung>
 
-        {/* TODO C4.2: truyền hanhDong={<button>Xóa giỏ hàng</button>} để làm rỗng giỏ */}
-        <Khung tieuDe="Giỏ hàng">
+        {/* C4.2: nút "Xóa giỏ hàng" truyền qua prop hanhDong */}
+        <Khung
+          tieuDe="Giỏ hàng"
+          hanhDong={
+            <button type="button" onClick={() => setGio([])}>
+              Xóa giỏ hàng
+            </button>
+          }
+        >
           <GioHang gio={gio} dsMon={DS_MON_AN} />
         </Khung>
 
         <Khung tieuDe="Thông tin nhận món">
-          {/* TODO C4.3: choPhepGui chỉ true khi giỏ có món; thêm key; hiện thông báo thành công bên dưới */}
-          <FormDatMon onGui={guiDon} choPhepGui={true} />
+          {/* C4.3: chỉ cho gửi khi giỏ có món; đổi key để đặt lại form */}
+          <FormDatMon key={khoaForm} onGui={guiDon} choPhepGui={gio.length > 0} />
+          {thongBao && (
+            <p role="status" className="thong-bao">
+              {thongBao}
+            </p>
+          )}
         </Khung>
       </main>
     </>

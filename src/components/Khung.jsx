@@ -1,10 +1,11 @@
 // Khung bọc một khối giao diện: có tiêu đề và nội dung
-export default function Khung({ tieuDe, children }) {
-  // TODO C4.2: thêm prop "hanhDong" (một đoạn JSX, ví dụ một nút) và hiển thị nó cạnh tiêu đề
+// C4.2: prop "hanhDong" (một đoạn JSX, ví dụ một nút) hiển thị cạnh tiêu đề
+export default function Khung({ tieuDe, hanhDong, children }) {
   return (
     <section className="khung">
       <div className="khung-dau">
         <h2>{tieuDe}</h2>
+        {hanhDong}
       </div>
       {children}
     </section>
