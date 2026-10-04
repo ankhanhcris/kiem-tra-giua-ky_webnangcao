@@ -4,8 +4,16 @@ import MonAnCard from './MonAnCard.jsx';
 export default function DanhSachMon({ dsMon, idDangChon, onChon, onDat }) {
   return (
     <div className="luoi-the">
-      {/* TODO C1.3: kết xuất mọi món trong dsMon bằng .map(), mỗi món là một <MonAnCard />.
-          Nhớ key. Truyền mon, dangChon = (mon.id === idDangChon), onChon, onDat. */}
+      {/* C1.3: mỗi món là một <MonAnCard />, key là id của món */}
+      {dsMon.map((mon) => (
+        <MonAnCard
+          key={mon.id}
+          mon={mon}
+          dangChon={mon.id === idDangChon}
+          onChon={onChon}
+          onDat={onDat}
+        />
+      ))}
     </div>
   );
 }
